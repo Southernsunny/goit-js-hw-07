@@ -25,14 +25,19 @@ function createGalery() {
 const onGalleryContainerClick = event => {
   event.preventDefault();
 
+  const nodeName = event.target.nodeName;
+  if (nodeName !== 'IMG') {
+    return;
+  }
+
   const source = event.target.dataset.source;
-  if (!source) return;
 
   const instance = basicLightbox.create(`
     <img src="${source}" width="800" height="600">`);
 
   instance.show();
 
+  // escape
   document.addEventListener(
     'keydown',
     event => {
